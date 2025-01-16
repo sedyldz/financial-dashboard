@@ -9,7 +9,7 @@ import { BalanceHistory } from "@/components/dashboard/balance-history"
 
 export default function DashboardPage() {
   return (
-    <div className="flex min-h-screen bg-background">
+    <div className="flex min-h-screen bg-background ">
   
       <div className="flex-1">
         <Header />
