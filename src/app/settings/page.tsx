@@ -1,15 +1,132 @@
+"use client";
+
 import { Header } from "@/components/header";
 import Image from "next/image";
+import { useState, useEffect } from "react";
+import { useToast } from "@/hooks/use-toast";
+
+interface UserData {
+  name: string;
+  username: string;
+  email: string;
+  dateOfBirth: string;
+  presentAddress: string;
+  permanentAddress: string;
+  city: string;
+  postalCode: string;
+  country: string;
+  profileImage: string;
+}
 
 export default function SettingsPage() {
+  const { toast } = useToast();
+  const [userData, setUserData] = useState<UserData>({
+    name: "",
+    username: "",
+    email: "",
+    dateOfBirth: "",
+    presentAddress: "",
+    permanentAddress: "",
+    city: "",
+    postalCode: "",
+    country: "",
+    profileImage: "/user.png",
+  });
+  const [isLoading, setIsLoading] = useState(false);
+  const [error, setError] = useState<string | null>(null);
+  const [isSaving, setIsSaving] = useState(false);
+
+  const handleInputChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setUserData((prev) => ({
+      ...prev,
+      [name]: value,
+    }));
+  };
+
+  useEffect(() => {
+    const fetchUserData = async () => {
+      try {
+        setIsLoading(true);
+        setError(null);
+        const response = await fetch("/api/user/profile");
+
+        if (!response.ok) {
+          throw new Error("Failed to fetch user data");
+        }
+
+        const data = await response.json();
+        setUserData(data);
+      } catch (err) {
+        setError(err instanceof Error ? err.message : "Failed to load user data");
+      } finally {
+        setIsLoading(false);
+      }
+    };
+
+    fetchUserData();
+  }, []);
+
+  const handleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      setIsSaving(true);
+      setError(null);
+
+      const response = await fetch("/api/user/profile", {
+        method: "PUT",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(userData),
+      });
+
+      if (!response.ok) {
+        throw new Error("Failed to update profile");
+      }
+
+      const updatedData = await response.json();
+      setUserData(updatedData);
+      toast({
+        title: "Success",
+        description: "Profile updated successfully!",
+      });
+    } catch (err) {
+      setError(err instanceof Error ? err.message : "Failed to update profile");
+    } finally {
+      setIsSaving(false);
+    }
+  };
+
+  if (isLoading) {
+    return (
+      <div className="flex min-h-screen bg-background">
+        <div className="flex-1">
+          <Header />
+          <main className="p-6">
+            <div className="flex items-center justify-center h-[calc(100vh-200px)]">
+              <div className="text-lg">Loading...</div>
+            </div>
+          </main>
+        </div>
+      </div>
+    );
+  }
+
   return (
     <div className="flex min-h-screen bg-background">
       <div className="flex-1">
         <Header />
-        <main className="p-6 ">
-          <div className=" bg-white p-8 rounded-3xl">
+        <main className="p-6">
+          <div className="bg-white p-4 md:p-8 rounded-3xl">
+            {error && (
+              <div className="mb-4 p-4 bg-red-50 border border-red-200 text-red-600 rounded-lg">
+                {error}
+              </div>
+            )}
+
             {/* Tabs */}
-            <div className="flex gap-6 mb-8 border-b">
+            <div className="flex gap-6 mb-8 border-b text-sm">
               <button className="pb-2 border-b-2 border-primary font-medium">Edit Profile</button>
               <button className="pb-2 text-muted-foreground">Preferences</button>
               <button className="pb-2 text-muted-foreground">Security</button>
@@ -18,16 +135,16 @@ export default function SettingsPage() {
             {/* Profile Form */}
             <div className="flex flex-col md:flex-row gap-8">
               {/* Profile Picture Section */}
-              <div className="flex-shrink-0 flex justify-center md:justify-start">
+              <div className="flex-shrink-0 flex justify-center md:justify-start max-h-min">
                 <div className="relative">
                   <Image
-                    src="/user.png"
+                    src={userData.profileImage}
                     alt="Profile"
                     width={96}
                     height={96}
                     className="rounded-full object-cover"
                   />
-                  <button className="absolute bottom-0 right-0 p-1 bg-primary rounded-full">
+                  <button className="absolute -bottom-2 -right-2 p-2 bg-primary rounded-full shadow-lg hover:bg-primary/90">
                     <svg
                       className="w-4 h-4 text-white"
                       fill="none"
@@ -46,7 +163,7 @@ export default function SettingsPage() {
               </div>
 
               {/* Form */}
-              <form className="flex-1 space-y-8">
+              <form onSubmit={handleSubmit} className="flex-1 space-y-8">
                 {/* Form Grid */}
                 <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
                   <div className="space-y-2">
@@ -54,7 +171,10 @@ export default function SettingsPage() {
                     <input
                       type="text"
                       placeholder="Enter your name"
-                      className="w-full p-2 rounded-md border bg-background"
+                      name="name"
+                      value={userData.name}
+                      onChange={handleInputChange}
+                      className="w-full p-2 rounded-2xl border bg-background text-light-gray-blue"
                     />
                   </div>
                   <div className="space-y-2">
@@ -62,7 +182,10 @@ export default function SettingsPage() {
                     <input
                       type="text"
                       placeholder="Enter username"
-                      className="w-full p-2 rounded-md border bg-background"
+                      name="username"
+                      value={userData.username}
+                      onChange={handleInputChange}
+                      className="w-full p-2 rounded-2xl border bg-background text-light-gray-blue"
                     />
                   </div>
                   <div className="space-y-2">
@@ -70,7 +193,10 @@ export default function SettingsPage() {
                     <input
                       type="email"
                       placeholder="Enter email"
-                      className="w-full p-2 rounded-md border bg-background"
+                      name="email"
+                      value={userData.email}
+                      onChange={handleInputChange}
+                      className="w-full p-2 rounded-2xl border bg-background text-light-gray-blue"
                     />
                   </div>
                   <div className="space-y-2">
@@ -78,19 +204,28 @@ export default function SettingsPage() {
                     <input
                       type="password"
                       placeholder="••••••••"
-                      className="w-full p-2 rounded-md border bg-background"
+                      className="w-full p-2 rounded-2xl border bg-background text-light-gray-blue"
                     />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium">Date of Birth</label>
-                    <input type="date" className="w-full p-2 rounded-md border bg-background" />
+                    <input
+                      type="date"
+                      name="dateOfBirth"
+                      value={userData.dateOfBirth}
+                      onChange={handleInputChange}
+                      className="w-full p-2 rounded-2xl border bg-background text-light-gray-blue"
+                    />
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium">Present Address</label>
                     <input
                       type="text"
                       placeholder="Enter present address"
-                      className="w-full p-2 rounded-md border bg-background"
+                      name="presentAddress"
+                      value={userData.presentAddress}
+                      onChange={handleInputChange}
+                      className="w-full p-2 rounded-2xl border bg-background text-light-gray-blue"
                     />
                   </div>
                   <div className="space-y-2">
@@ -98,7 +233,10 @@ export default function SettingsPage() {
                     <input
                       type="text"
                       placeholder="Enter permanent address"
-                      className="w-full p-2 rounded-md border bg-background"
+                      name="permanentAddress"
+                      value={userData.permanentAddress}
+                      onChange={handleInputChange}
+                      className="w-full p-2 rounded-2xl border bg-background text-light-gray-blue"
                     />
                   </div>
                   <div className="space-y-2">
@@ -106,7 +244,10 @@ export default function SettingsPage() {
                     <input
                       type="text"
                       placeholder="Enter city"
-                      className="w-full p-2 rounded-md border bg-background"
+                      name="city"
+                      value={userData.city}
+                      onChange={handleInputChange}
+                      className="w-full p-2 rounded-2xl border bg-background text-light-gray-blue"
                     />
                   </div>
                   <div className="space-y-2">
@@ -114,7 +255,10 @@ export default function SettingsPage() {
                     <input
                       type="text"
                       placeholder="Enter postal code"
-                      className="w-full p-2 rounded-md border bg-background"
+                      name="postalCode"
+                      value={userData.postalCode}
+                      onChange={handleInputChange}
+                      className="w-full p-2 rounded-2xl border bg-background text-light-gray-blue"
                     />
                   </div>
                   <div className="space-y-2">
@@ -122,15 +266,23 @@ export default function SettingsPage() {
                     <input
                       type="text"
                       placeholder="Enter country"
-                      className="w-full p-2 rounded-md border bg-background"
+                      name="country"
+                      value={userData.country}
+                      onChange={handleInputChange}
+                      className="w-full p-2 rounded-2xl border bg-background text-light-gray-blue"
                     />
                   </div>
                 </div>
 
                 {/* Save Button */}
                 <div className="flex justify-end">
-                  <button className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90">
-                    Save
+                  <button
+                    type="submit"
+                    disabled={isSaving}
+                    onClick={handleSubmit}
+                    className="px-4 py-2 bg-primary text-primary-foreground rounded-md hover:bg-primary/90 disabled:opacity-50 disabled:cursor-not-allowed"
+                  >
+                    {isSaving ? "Saving..." : "Save"}
                   </button>
                 </div>
               </form>
