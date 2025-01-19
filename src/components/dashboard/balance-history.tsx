@@ -9,17 +9,14 @@ import {
   AreaChart,
 } from "recharts";
 
-const data = [
-  { name: "Jul", value: 300 },
-  { name: "Aug", value: 400 },
-  { name: "Sep", value: 700 },
-  { name: "Oct", value: 500 },
-  { name: "Nov", value: 600 },
-  { name: "Dec", value: 300 },
-  { name: "Jan", value: 500 },
-];
+interface BalanceHistoryProps {
+  data: {
+    month: string;
+    balance: number;
+  }[];
+}
 
-export function BalanceHistory() {
+export function BalanceHistory({ data }: BalanceHistoryProps) {
   return (
     <Card className="border-none shadow-none bg-transparent space-y-6 p-0 ">
       <CardHeader className="p-0">
@@ -36,12 +33,12 @@ export function BalanceHistory() {
                 <stop offset="95%" stopColor="#4F46E5" stopOpacity={0} />
               </linearGradient>
             </defs>
-            <XAxis dataKey="name" />
+            <XAxis dataKey="month" />
             <YAxis />
             <Tooltip />
             <Area
               type="monotone"
-              dataKey="value"
+              dataKey="balance"
               stroke="#4F46E5"
               fillOpacity={1}
               fill="url(#colorValue)"

@@ -1,8 +1,7 @@
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
-import { Bell, Search, Settings, Menu } from "lucide-react";
-import { Separator } from "@/components/ui/separator";
+import { Bell, Search, Settings } from "lucide-react";
 import { SidebarTrigger } from "@/components/ui/sidebar";
 
 export function Header() {
@@ -11,9 +10,7 @@ export function Header() {
       <div className="flex h-16 items-center px-4 gap-4">
         {/* Mobile view */}
         <div className="flex md:hidden items-center w-full">
-          <SidebarTrigger className="-ml-1">
-            <Menu className="h-5 w-5" />
-          </SidebarTrigger>
+          <SidebarTrigger className="-ml-1" />
           <h2 className="text-lg font-semibold flex-1 text-center">Overview</h2>
           <Avatar>
             <AvatarImage src="/user.png" />
@@ -23,10 +20,6 @@ export function Header() {
         {/* Desktop view */}
         <div className="hidden md:flex items-center w-full">
           <div className="flex items-center gap-2">
-            <SidebarTrigger className="-ml-1">
-              <Menu className="h-5 w-5" />
-            </SidebarTrigger>
-            <Separator orientation="vertical" className="mr-2 h-4" />
             <h2 className="text-lg font-semibold">Overview</h2>
           </div>
           <div className="ml-auto hidden md:flex items-center gap-4">

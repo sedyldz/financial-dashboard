@@ -71,9 +71,64 @@ async function getRecentTransactions(): Promise<Transaction[]> {
   ];
 }
 
+// Additional mock interfaces
+interface WeeklyActivityData {
+  day: string;
+  income: number;
+  expenses: number;
+}
+
+interface ExpenseCategory {
+  category: string;
+  amount: number;
+  percentage: number;
+}
+
+interface BalanceHistoryPoint {
+  month: string;
+  balance: number;
+}
+
+// Additional mock API functions
+async function getWeeklyActivity(): Promise<WeeklyActivityData[]> {
+  return [
+    { day: "Mon", income: 1200, expenses: 800 },
+    { day: "Tue", income: 900, expenses: 1100 },
+    { day: "Wed", income: 1500, expenses: 950 },
+    { day: "Thu", income: 800, expenses: 700 },
+    { day: "Fri", income: 1100, expenses: 850 },
+    { day: "Sat", income: 600, expenses: 1200 },
+    { day: "Sun", income: 400, expenses: 500 },
+  ];
+}
+
+async function getExpenseStats(): Promise<ExpenseCategory[]> {
+  return [
+    { category: "Entertainment", amount: 900, percentage: 30 },
+    { category: "Investment", amount: 600, percentage: 20 },
+    { category: "Bill Expense", amount: 450, percentage: 15 },
+    { category: "Others", amount: 1050, percentage: 35 },
+  ];
+}
+
+async function getBalanceHistory(): Promise<BalanceHistoryPoint[]> {
+  return [
+    { month: "Jul", balance: 300 },
+    { month: "Aug", balance: 400 },
+    { month: "Sep", balance: 700 },
+    { month: "Oct", balance: 500 },
+    { month: "Nov", balance: 600 },
+    { month: "Dec", balance: 300 },
+    { month: "Jan", balance: 500 },
+  ];
+}
+
 export default async function DashboardPage() {
   const cards = await getCards();
   const transactions = await getRecentTransactions();
+  const weeklyActivity = await getWeeklyActivity();
+  const expenseStats = await getExpenseStats();
+  const balanceHistory = await getBalanceHistory();
 
   return (
     <div className="flex min-h-screen bg-background ">
@@ -107,10 +162,10 @@ export default async function DashboardPage() {
 
             {/* Second Row */}
             <div className="md:col-span-8">
-              <WeeklyActivity />
+              <WeeklyActivity data={weeklyActivity} />
             </div>
             <div className="md:col-span-4">
-              <ExpenseStats />
+              <ExpenseStats data={expenseStats} />
             </div>
 
             {/* Third Row */}
@@ -118,7 +173,7 @@ export default async function DashboardPage() {
               <QuickTransfer />
             </div>
             <div className="md:col-span-8">
-              <BalanceHistory />
+              <BalanceHistory data={balanceHistory} />
             </div>
           </div>
         </main>

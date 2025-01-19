@@ -2,14 +2,15 @@
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { PieChart, Pie, Cell, ResponsiveContainer } from "recharts";
 
-const data = [
-  { name: "Entertainment", value: 30 },
-  { name: "Investment", value: 20 },
-  { name: "Bill Expense", value: 15 },
-  { name: "Others", value: 35 },
-];
+interface ExpenseStatsProps {
+  data: {
+    category: string;
+    amount: number;
+    percentage: number;
+  }[];
+}
 
-const COLORS = ["#312E81", "#4F46E5", "#F97316", "#111827"];
+const COLORS = ["#312E81", "#4F46E5", "#F97316", "#111827", "#6B7280"];
 
 // Add this custom label renderer function
 const renderCustomizedLabel = ({
@@ -47,7 +48,13 @@ const renderCustomizedLabel = ({
   );
 };
 
-export function ExpenseStats() {
+export function ExpenseStats({ data }: ExpenseStatsProps) {
+  // Transform data for the pie chart
+  const pieData = data.map((item) => ({
+    name: item.category,
+    value: item.amount,
+  }));
+
   return (
     <Card className="border-none shadow-none bg-transparent space-y-6 p-0">
       <CardHeader className="p-0">
@@ -59,16 +66,17 @@ export function ExpenseStats() {
         <ResponsiveContainer width="100%" height={300}>
           <PieChart>
             <Pie
-              data={data}
+              data={pieData}
               cx="50%"
               cy="50%"
               labelLine={false}
               outerRadius={140}
               fill="#8884d8"
               dataKey="value"
+              nameKey="category"
               label={renderCustomizedLabel}
             >
-              {data.map((entry, index) => (
+              {pieData.map((entry, index) => (
                 <Cell
                   key={`cell-${index}`}
                   fill={COLORS[index % COLORS.length]}
