@@ -22,7 +22,7 @@ export function MyCards() {
   return (
     <>
       {cards.map((card, index) => (
-        <Card key={index} className="overflow-hidden rounded-3xl">
+        <Card key={index} className="overflow-hidden rounded-3xl flex-1">
           <CardContent
             className={`pt-6 pb-0 px-0 ${
               card.variant === "dark"

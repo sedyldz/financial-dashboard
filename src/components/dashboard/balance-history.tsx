@@ -21,7 +21,7 @@ const data = [
 
 export function BalanceHistory() {
   return (
-    <Card className="border-none shadow-none bg-transparent space-y-6 p-0">
+    <Card className="border-none shadow-none bg-transparent space-y-6 p-0 ">
       <CardHeader className="p-0">
         <CardTitle className="text-2xl font-semibold tracking-tight p-0">
           Balance History

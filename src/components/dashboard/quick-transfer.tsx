@@ -2,7 +2,7 @@ import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
-import { ChevronRight } from "lucide-react";
+import { ChevronRight, Send } from "lucide-react";
 
 const contacts = [
   {
@@ -39,7 +39,9 @@ export function QuickTransfer() {
             >
               <Avatar className="h-12 w-12 mb-2">
                 <AvatarImage src={contact.image} alt={contact.name} />
-                <AvatarFallback>{contact.name[0]}</AvatarFallback>
+                <AvatarFallback className="bg-background">
+                  {contact.name[0]}
+                </AvatarFallback>
               </Avatar>
               <div className="text-center">
                 <p className="text-sm font-medium">{contact.name}</p>
@@ -55,9 +57,19 @@ export function QuickTransfer() {
             <ChevronRight className="h-4 w-4" />
           </Button>
         </div>
-        <div className="flex gap-2">
-          <Input type="number" placeholder="Enter amount" />
-          <Button>Send</Button>
+        <div className="flex gap-3 items-center ">
+          <span className="text-sm opacity-70 min-w-max">Write Amount</span>
+          <div className="flex bg-background rounded-l-full">
+            <Input
+              className="  border-none m-0"
+              type="number"
+              placeholder="525.50"
+            />
+            <Button className="rounded-full">
+              Send
+              <Send className="h-4 w-4 ml-2" />
+            </Button>
+          </div>
         </div>
       </CardContent>
     </Card>
