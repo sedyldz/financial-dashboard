@@ -1,34 +1,29 @@
 import { Card, CardContent } from "@/components/ui/card";
 import Image from "next/image";
 
-const cards = [
-  {
-    balance: 5756,
-    cardHolder: "Eddy Cusuma",
-    cardNumber: "3778 **** **** 1234",
-    validThru: "12/22",
-    variant: "dark",
-  },
-  {
-    balance: 5756,
-    cardHolder: "Eddy Cusuma",
-    cardNumber: "3778 **** **** 1234",
-    validThru: "12/22",
-    variant: "light",
-  },
-];
+interface CardData {
+  id: string;
+  type: string;
+  number: string;
+  balance: number;
+  currency: string;
+}
 
-export function MyCards() {
+interface MyCardsProps {
+  cards: CardData[];
+}
+
+export function MyCards({ cards }: MyCardsProps) {
   return (
     <>
-      {cards.map((card, index) => (
+      {cards.map((card) => (
         <Card
-          key={index}
+          key={card.id}
           className="overflow-hidden rounded-3xl flex-1 min-w-[300px]"
         >
           <CardContent
             className={`pt-6 pb-0 px-0 ${
-              card.variant === "dark"
+              card.type.toLowerCase() === "visa"
                 ? "bg-gradient-to-r from-[#5B5A6F] to-[#000000] text-white"
                 : "bg-white"
             }`}
@@ -43,12 +38,14 @@ export function MyCards() {
                 </div>
                 <div
                   className={`flex gap-1 ${
-                    card.variant === "dark" ? "text-white" : "text-black"
+                    card.type.toLowerCase() === "visa"
+                      ? "text-white"
+                      : "text-black"
                   }`}
                 >
                   <Image
                     src={
-                      card.variant === "dark"
+                      card.type.toLowerCase() === "visa"
                         ? "/Chip_Card_White.png"
                         : "/Chip_Card.png"
                     }
@@ -62,17 +59,17 @@ export function MyCards() {
               <div className="px-6">
                 <div className="flex justify-between mt-4">
                   <div>
-                    <p className="text-xs opacity-70">CARD HOLDER</p>
-                    <p>{card.cardHolder}</p>
+                    <p className="text-xs opacity-70">CARD TYPE</p>
+                    <p>{card.type}</p>
                   </div>
                   <div>
-                    <p className="text-xs opacity-70">VALID THRU</p>
-                    <p>{card.validThru}</p>
+                    <p className="text-xs opacity-70">CURRENCY</p>
+                    <p>{card.currency}</p>
                   </div>
                 </div>
               </div>
               <div className="flex justify-between p-4 bg-gradient-to-b from-white/15 to-transparent">
-                <p className="text-lg tracking-wider">{card.cardNumber}</p>
+                <p className="text-lg tracking-wider">{card.number}</p>
                 <svg
                   width="44"
                   height="30"

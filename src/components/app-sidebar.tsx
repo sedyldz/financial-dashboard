@@ -1,3 +1,5 @@
+"use client";
+
 // Remove the Lucide import and add custom SVG import
 import {
   HomeIcon,
@@ -22,13 +24,14 @@ import {
   SidebarMenuItem,
 } from "@/components/ui/sidebar";
 
+import { usePathname } from "next/navigation";
+
 // Menu items.
 const items = [
   {
     title: "Dashboard",
-    url: "#",
+    url: "/",
     icon: HomeIcon,
-    active: true,
   },
   {
     title: "Transactions",
@@ -67,12 +70,14 @@ const items = [
   },
   {
     title: "Settings",
-    url: "#",
+    url: "/settings",
     icon: SettingsIcon,
   },
 ];
 
 export function AppSidebar() {
+  const pathname = usePathname();
+
   return (
     <Sidebar>
       <SidebarContent className="px-0">
@@ -86,7 +91,7 @@ export function AppSidebar() {
                 <SidebarMenuItem
                   key={item.title}
                   className={
-                    item.active
+                    item.url === pathname
                       ? "before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-primary before:rounded-tr-md before:rounded-br-md relative"
                       : ""
                   }
@@ -96,7 +101,9 @@ export function AppSidebar() {
                     asChild
                   >
                     <a
-                      className={!item.active ? "text-muted-foreground" : ""}
+                      className={
+                        item.url !== pathname ? "text-muted-foreground" : ""
+                      }
                       href={item.url}
                     >
                       <item.icon />
