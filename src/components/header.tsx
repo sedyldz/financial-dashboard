@@ -15,7 +15,7 @@ export function Header() {
       <div className="flex h-16 items-center px-4 gap-4">
         {/* Mobile view */}
         <div className="flex md:hidden items-center w-full">
-          <SidebarTrigger className="-ml-1" />
+          <SidebarTrigger className="ml-1 px-0" />
           <h2 className="text-lg font-semibold flex-1 text-center">Overview</h2>
           <Avatar className="cursor-pointer" onClick={() => router.push("/settings")}>
             <AvatarImage src="/user.png" />
