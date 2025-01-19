@@ -1,57 +1,104 @@
-import { Calendar, Home, Inbox, Search, Settings } from "lucide-react"
+// Remove the Lucide import and add custom SVG import
+import {
+  HomeIcon,
+  TransferIcon,
+  AccountIcon,
+  SettingsIcon,
+  LoanIcon,
+  PrivilegeIcon,
+  InvestmentIcon,
+  CreditCardIcon,
+  ServicesIcon,
+  LogoIcon,
+} from "@/components/icons";
 
 import {
   Sidebar,
   SidebarContent,
   SidebarGroup,
   SidebarGroupContent,
-  SidebarGroupLabel,
   SidebarMenu,
   SidebarMenuButton,
   SidebarMenuItem,
-} from "@/components/ui/sidebar"
+} from "@/components/ui/sidebar";
 
 // Menu items.
 const items = [
   {
-    title: "Home",
+    title: "Dashboard",
     url: "#",
-    icon: Home,
+    icon: HomeIcon,
+    active: true,
   },
   {
-    title: "Inbox",
+    title: "Transactions",
     url: "#",
-    icon: Inbox,
+    icon: TransferIcon,
   },
   {
-    title: "Calendar",
+    title: "Accounts",
     url: "#",
-    icon: Calendar,
+    icon: AccountIcon,
   },
   {
-    title: "Search",
+    title: "Investments",
     url: "#",
-    icon: Search,
+    icon: InvestmentIcon,
+  },
+  {
+    title: "Credit Cards",
+    url: "#",
+    icon: CreditCardIcon,
+  },
+  {
+    title: "Loans",
+    url: "#",
+    icon: LoanIcon,
+  },
+  {
+    title: "Services",
+    url: "#",
+    icon: ServicesIcon,
+  },
+  {
+    title: "My Privileges",
+    url: "#",
+    icon: PrivilegeIcon,
   },
   {
     title: "Settings",
     url: "#",
-    icon: Settings,
+    icon: SettingsIcon,
   },
-]
+];
 
 export function AppSidebar() {
   return (
     <Sidebar>
-      <SidebarContent>
-        <SidebarGroup>
-          <SidebarGroupLabel>Application</SidebarGroupLabel>
+      <SidebarContent className="px-0">
+        <div className="flex px-2 py-6">
+          <LogoIcon />
+        </div>
+        <SidebarGroup className="px-0">
           <SidebarGroupContent>
-            <SidebarMenu>
+            <SidebarMenu className="flex gap-4 ">
               {items.map((item) => (
-                <SidebarMenuItem key={item.title}>
-                  <SidebarMenuButton asChild>
-                    <a href={item.url}>
+                <SidebarMenuItem
+                  key={item.title}
+                  className={
+                    item.active
+                      ? "before:absolute before:left-0 before:top-0 before:h-full before:w-1 before:bg-primary before:rounded-tr-md before:rounded-br-md relative"
+                      : ""
+                  }
+                >
+                  <SidebarMenuButton
+                    className="flex items-center gap-5 text-base px-6 py-4"
+                    asChild
+                  >
+                    <a
+                      className={!item.active ? "text-muted-foreground" : ""}
+                      href={item.url}
+                    >
                       <item.icon />
                       <span>{item.title}</span>
                     </a>
@@ -63,5 +110,5 @@ export function AppSidebar() {
         </SidebarGroup>
       </SidebarContent>
     </Sidebar>
-  )
+  );
 }
