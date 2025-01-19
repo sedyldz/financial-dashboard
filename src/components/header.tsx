@@ -1,10 +1,15 @@
+"use client";
+
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
 import { Bell, Search, Settings } from "lucide-react";
 import { SidebarTrigger } from "@/components/ui/sidebar";
+import { useRouter } from "next/navigation";
 
 export function Header() {
+  const router = useRouter();
+
   return (
     <header className="border-b bg-white">
       <div className="flex h-16 items-center px-4 gap-4">
@@ -12,7 +17,7 @@ export function Header() {
         <div className="flex md:hidden items-center w-full">
           <SidebarTrigger className="-ml-1" />
           <h2 className="text-lg font-semibold flex-1 text-center">Overview</h2>
-          <Avatar>
+          <Avatar className="cursor-pointer" onClick={() => router.push("/settings")}>
             <AvatarImage src="/user.png" />
             <AvatarFallback>EC</AvatarFallback>
           </Avatar>
@@ -45,7 +50,7 @@ export function Header() {
             >
               <Bell className="h-5 w-5 text-transaction-blue" />
             </Button>
-            <Avatar>
+            <Avatar className="cursor-pointer" onClick={() => router.push("/settings")}>
               <AvatarImage src="/user.png" />
               <AvatarFallback>EC</AvatarFallback>
             </Avatar>
