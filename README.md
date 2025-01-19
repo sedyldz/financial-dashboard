@@ -1,4 +1,4 @@
-# Soar Project
+# Financial Dashboard Sample UI Project
 
 A modern web application built with Next.js, TypeScript, and TailwindCSS.
 
