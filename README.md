@@ -4,7 +4,7 @@ A modern web application built with Next.js, TypeScript, and TailwindCSS.
 
 ## 🔗 Live Demo
 
-Check out the live Vercel demo: [Soar App](https://soar-git-main-sedanuryildiz23-gmailcoms-projects.vercel.app/settings)
+Check out the live Vercel demo: [Finacial Dashboard App](https://soar-mocha.vercel.app)
 
 ## 🚀 Getting Started
 
@@ -18,8 +18,8 @@ Check out the live Vercel demo: [Soar App](https://soar-git-main-sedanuryildiz23
 1. Clone the repository:
 
    ```bash
-   git clone https://github.com/yourusername/soar.git
-   cd soar
+   git clone https://github.com/yourusername/financial-dashboard.git
+   cd financial-dashboard
    ```
 
 2. Install dependencies:
