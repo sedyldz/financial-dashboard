@@ -7,6 +7,8 @@ interface CardData {
   number: string;
   balance: number;
   currency: string;
+  holderName: string;
+  validThru: string;
 }
 
 interface MyCardsProps {
@@ -17,7 +19,7 @@ export function MyCards({ cards }: MyCardsProps) {
   return (
     <>
       {cards.map((card) => (
-        <Card key={card.id} className="overflow-hidden rounded-3xl flex-1 min-w-[300px]">
+        <Card key={card.id} className="overflow-hidden rounded-3xl flex-1 min-w-[300px] ">
           <CardContent
             className={`pt-6 pb-0 px-0 ${
               card.type.toLowerCase() === "visa"
@@ -50,17 +52,21 @@ export function MyCards({ cards }: MyCardsProps) {
               <div className="px-6">
                 <div className="flex justify-between mt-4">
                   <div>
-                    <p className="text-xs opacity-70">CARD TYPE</p>
-                    <p>{card.type}</p>
+                    <p className="text-xs opacity-70">CARD HOLDER</p>
+                    <p>{card.holderName}</p>
                   </div>
                   <div>
-                    <p className="text-xs opacity-70">CURRENCY</p>
-                    <p>{card.currency}</p>
+                    <p className="text-xs opacity-70">VALID THRU</p>
+                    <p>{card.validThru}</p>
                   </div>
                 </div>
               </div>
-              <div className="flex justify-between p-4 bg-gradient-to-b from-white/15 to-transparent">
-                <p className="text-lg tracking-wider">{card.number}</p>
+              <div
+                className={`flex justify-between p-5 bg-gradient-to-b from-white/15 to-transparent ${
+                  card.type.toLowerCase() !== "visa" ? "border-t border-gray-200 pt-4" : ""
+                }`}
+              >
+                <p className={`text-lg tracking-wider`}>{card.number}</p>
                 <svg
                   width="44"
                   height="30"
@@ -68,8 +74,20 @@ export function MyCards({ cards }: MyCardsProps) {
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <circle cx="15" cy="15" r="15" fill="white" fillOpacity="0.5" />
-                  <circle cx="29" cy="15" r="15" fill="white" fillOpacity="0.5" />
+                  <circle
+                    cx="15"
+                    cy="15"
+                    r="15"
+                    fill={card.type.toLowerCase() === "visa" ? "white" : "#9199AF"}
+                    fillOpacity="0.5"
+                  />
+                  <circle
+                    cx="29"
+                    cy="15"
+                    r="15"
+                    fill={card.type.toLowerCase() === "visa" ? "white" : "#9199AF"}
+                    fillOpacity="0.5"
+                  />
                 </svg>
               </div>
             </div>

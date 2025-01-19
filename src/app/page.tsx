@@ -15,6 +15,8 @@ interface Card {
   number: string;
   balance: number;
   currency: string;
+  holderName: string;
+  validThru: string;
 }
 
 interface Transaction {
@@ -31,16 +33,20 @@ async function getCards(): Promise<Card[]> {
     {
       id: "1",
       type: "Visa",
-      number: "**** 4242",
+      number: "3778 **** **** 1234",
       balance: 5420.42,
       currency: "USD",
+      holderName: "Eddy Cusuma",
+      validThru: "12/22",
     },
     {
       id: "2",
       type: "Mastercard",
-      number: "**** 5555",
+      number: "3778 **** **** 1234",
       balance: 2800.0,
       currency: "USD",
+      holderName: "Eddy Cusuma",
+      validThru: "12/22",
     },
   ];
 }
