@@ -12,12 +12,12 @@ export default function DashboardPage() {
     <div className="flex min-h-screen bg-background ">
       <div className="flex-1">
         <Header />
-        <main className="p-6 space-y-6">
+        <main className="p-6 space-y-6 overflow-x-hidden">
           <div className="grid grid-cols-1 md:grid-cols-12 gap-6">
             {/* First Row */}
             <div className="md:col-span-8">
               <div>
-                <div className="flex justify-between items-center mb-6">
+                <div className="flex justify-between items-center mb-6 overflow-x-auto">
                   <h2 className="text-2xl font-semibold tracking-tight">
                     My Cards
                   </h2>
@@ -25,7 +25,7 @@ export default function DashboardPage() {
                     See All
                   </button>
                 </div>
-                <div className="flex flex-row gap-4 ">
+                <div className="flex flex-row gap-4 overflow-x-auto pb-4">
                   <MyCards />
                 </div>
               </div>
