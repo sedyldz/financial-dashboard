@@ -1,13 +1,6 @@
 "use client";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  XAxis,
-  YAxis,
-  ResponsiveContainer,
-  Tooltip,
-  Area,
-  AreaChart,
-} from "recharts";
+import { XAxis, YAxis, ResponsiveContainer, Tooltip, Area, AreaChart } from "recharts";
 
 interface BalanceHistoryProps {
   data: {
@@ -20,9 +13,7 @@ export function BalanceHistory({ data }: BalanceHistoryProps) {
   return (
     <Card className="border-none shadow-none bg-transparent space-y-6 p-0 ">
       <CardHeader className="p-0">
-        <CardTitle className="text-2xl font-semibold tracking-tight p-0">
-          Balance History
-        </CardTitle>
+        <CardTitle className="text-2xl font-semibold tracking-tight p-0">Balance History</CardTitle>
       </CardHeader>
       <CardContent className="bg-white p-6 border rounded-3xl border-gray-200">
         <ResponsiveContainer width="100%" height={300}>

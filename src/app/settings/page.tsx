@@ -10,12 +10,8 @@ export default function SettingsPage() {
           <div className=" bg-white p-8 rounded-3xl">
             {/* Tabs */}
             <div className="flex gap-6 mb-8 border-b">
-              <button className="pb-2 border-b-2 border-primary font-medium">
-                Edit Profile
-              </button>
-              <button className="pb-2 text-muted-foreground">
-                Preferences
-              </button>
+              <button className="pb-2 border-b-2 border-primary font-medium">Edit Profile</button>
+              <button className="pb-2 text-muted-foreground">Preferences</button>
               <button className="pb-2 text-muted-foreground">Security</button>
             </div>
 
@@ -87,15 +83,10 @@ export default function SettingsPage() {
                   </div>
                   <div className="space-y-2">
                     <label className="text-sm font-medium">Date of Birth</label>
-                    <input
-                      type="date"
-                      className="w-full p-2 rounded-md border bg-background"
-                    />
+                    <input type="date" className="w-full p-2 rounded-md border bg-background" />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">
-                      Present Address
-                    </label>
+                    <label className="text-sm font-medium">Present Address</label>
                     <input
                       type="text"
                       placeholder="Enter present address"
@@ -103,9 +94,7 @@ export default function SettingsPage() {
                     />
                   </div>
                   <div className="space-y-2">
-                    <label className="text-sm font-medium">
-                      Permanent Address
-                    </label>
+                    <label className="text-sm font-medium">Permanent Address</label>
                     <input
                       type="text"
                       placeholder="Enter permanent address"

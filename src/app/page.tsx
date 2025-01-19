@@ -140,12 +140,8 @@ export default async function DashboardPage() {
             <div className="md:col-span-8">
               <div>
                 <div className="flex justify-between items-center mb-6 overflow-x-auto">
-                  <h2 className="text-2xl font-semibold tracking-tight">
-                    My Cards
-                  </h2>
-                  <button className="text-primary hover:underline">
-                    See All
-                  </button>
+                  <h2 className="text-2xl font-semibold tracking-tight">My Cards</h2>
+                  <button className="text-primary hover:underline">See All</button>
                 </div>
                 <div className="flex flex-row gap-4 overflow-x-auto pb-4">
                   <Suspense fallback={<div>Loading cards...</div>}>

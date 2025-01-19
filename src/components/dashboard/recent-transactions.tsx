@@ -50,10 +50,7 @@ export function RecentTransactions({ transactions }: RecentTransactionsProps) {
           {transactions.map((transaction) => {
             const display = getTransactionDisplay(transaction.type);
             return (
-              <div
-                key={transaction.id}
-                className="flex items-center justify-between"
-              >
+              <div key={transaction.id} className="flex items-center justify-between">
                 <div className="flex items-center gap-3">
                   <div
                     className={`w-10 h-10 rounded-full flex items-center justify-center ${display.bgColor}`}
@@ -73,9 +70,7 @@ export function RecentTransactions({ transactions }: RecentTransactionsProps) {
                 </div>
                 <p
                   className={`font-medium ${
-                    transaction.type.toLowerCase() === "credit"
-                      ? "text-green-600"
-                      : "text-red-600"
+                    transaction.type.toLowerCase() === "credit" ? "text-green-600" : "text-red-600"
                   }`}
                 >
                   {transaction.type.toLowerCase() === "credit" ? "+" : "-"}

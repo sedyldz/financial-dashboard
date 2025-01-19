@@ -17,10 +17,7 @@ export function MyCards({ cards }: MyCardsProps) {
   return (
     <>
       {cards.map((card) => (
-        <Card
-          key={card.id}
-          className="overflow-hidden rounded-3xl flex-1 min-w-[300px]"
-        >
+        <Card key={card.id} className="overflow-hidden rounded-3xl flex-1 min-w-[300px]">
           <CardContent
             className={`pt-6 pb-0 px-0 ${
               card.type.toLowerCase() === "visa"
@@ -32,22 +29,16 @@ export function MyCards({ cards }: MyCardsProps) {
               <div className="flex justify-between px-6">
                 <div>
                   <p className="text-sm opacity-70">Balance</p>
-                  <p className="text-2xl font-semibold">
-                    ${card.balance.toLocaleString()}
-                  </p>
+                  <p className="text-2xl font-semibold">${card.balance.toLocaleString()}</p>
                 </div>
                 <div
                   className={`flex gap-1 ${
-                    card.type.toLowerCase() === "visa"
-                      ? "text-white"
-                      : "text-black"
+                    card.type.toLowerCase() === "visa" ? "text-white" : "text-black"
                   }`}
                 >
                   <Image
                     src={
-                      card.type.toLowerCase() === "visa"
-                        ? "/Chip_Card_White.png"
-                        : "/Chip_Card.png"
+                      card.type.toLowerCase() === "visa" ? "/Chip_Card_White.png" : "/Chip_Card.png"
                     }
                     alt="Card chip"
                     width={34}
@@ -77,20 +68,8 @@ export function MyCards({ cards }: MyCardsProps) {
                   fill="none"
                   xmlns="http://www.w3.org/2000/svg"
                 >
-                  <circle
-                    cx="15"
-                    cy="15"
-                    r="15"
-                    fill="white"
-                    fillOpacity="0.5"
-                  />
-                  <circle
-                    cx="29"
-                    cy="15"
-                    r="15"
-                    fill="white"
-                    fillOpacity="0.5"
-                  />
+                  <circle cx="15" cy="15" r="15" fill="white" fillOpacity="0.5" />
+                  <circle cx="29" cy="15" r="15" fill="white" fillOpacity="0.5" />
                 </svg>
               </div>
             </div>

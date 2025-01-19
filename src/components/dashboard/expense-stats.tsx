@@ -35,14 +35,7 @@ const renderCustomizedLabel = ({
   const y = cy + radius * Math.sin((-midAngle * Math.PI) / 180);
 
   return (
-    <text
-      x={x}
-      y={y}
-      fill="white"
-      textAnchor="middle"
-      dominantBaseline="central"
-      fontSize="12"
-    >
+    <text x={x} y={y} fill="white" textAnchor="middle" dominantBaseline="central" fontSize="12">
       {`${name} ${(percent * 100).toFixed(0)}%`}
     </text>
   );
@@ -77,10 +70,7 @@ export function ExpenseStats({ data }: ExpenseStatsProps) {
               label={renderCustomizedLabel}
             >
               {pieData.map((entry, index) => (
-                <Cell
-                  key={`cell-${index}`}
-                  fill={COLORS[index % COLORS.length]}
-                />
+                <Cell key={`cell-${index}`} fill={COLORS[index % COLORS.length]} />
               ))}
             </Pie>
           </PieChart>

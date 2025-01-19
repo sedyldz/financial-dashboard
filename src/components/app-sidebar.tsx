@@ -101,9 +101,7 @@ export function AppSidebar() {
                     asChild
                   >
                     <a
-                      className={
-                        item.url !== pathname ? "text-muted-foreground" : ""
-                      }
+                      className={item.url !== pathname ? "text-muted-foreground" : ""}
                       href={item.url}
                     >
                       <item.icon />
