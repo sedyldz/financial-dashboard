@@ -1,8 +1,8 @@
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar"
-import { Button } from "@/components/ui/button"
-import { Input } from "@/components/ui/input"
-import { ChevronRight } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
+import { Avatar, AvatarFallback, AvatarImage } from "@/components/ui/avatar";
+import { Button } from "@/components/ui/button";
+import { Input } from "@/components/ui/input";
+import { ChevronRight } from "lucide-react";
 
 const contacts = [
   {
@@ -20,15 +20,17 @@ const contacts = [
     role: "Designer",
     image: "/avatars/workman.jpg",
   },
-]
+];
 
 export function QuickTransfer() {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Quick Transfer</CardTitle>
+    <Card className="border-none shadow-none bg-transparent space-y-6 p-0">
+      <CardHeader className="p-0">
+        <CardTitle className="text-2xl font-semibold tracking-tight p-0">
+          Quick Transfer
+        </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="bg-white p-6 border rounded-3xl border-gray-200">
         <div className="flex gap-2 mb-4 overflow-x-auto pb-2">
           {contacts.map((contact) => (
             <div
@@ -45,7 +47,11 @@ export function QuickTransfer() {
               </div>
             </div>
           ))}
-          <Button variant="outline" size="sm" className="h-12 w-12 rounded-full">
+          <Button
+            variant="outline"
+            size="sm"
+            className="h-12 w-12 rounded-full"
+          >
             <ChevronRight className="h-4 w-4" />
           </Button>
         </div>
@@ -55,5 +61,5 @@ export function QuickTransfer() {
         </div>
       </CardContent>
     </Card>
-  )
+  );
 }

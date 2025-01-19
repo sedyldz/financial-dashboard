@@ -1,15 +1,13 @@
-"use client"
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+"use client";
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import {
-  LineChart,
-  Line,
   XAxis,
   YAxis,
   ResponsiveContainer,
   Tooltip,
   Area,
   AreaChart,
-} from "recharts"
+} from "recharts";
 
 const data = [
   { name: "Jul", value: 300 },
@@ -19,15 +17,17 @@ const data = [
   { name: "Nov", value: 600 },
   { name: "Dec", value: 300 },
   { name: "Jan", value: 500 },
-]
+];
 
 export function BalanceHistory() {
   return (
-    <Card>
-      <CardHeader>
-        <CardTitle>Balance History</CardTitle>
+    <Card className="border-none shadow-none bg-transparent space-y-6 p-0">
+      <CardHeader className="p-0">
+        <CardTitle className="text-2xl font-semibold tracking-tight p-0">
+          Balance History
+        </CardTitle>
       </CardHeader>
-      <CardContent>
+      <CardContent className="bg-white p-6 border rounded-3xl border-gray-200">
         <ResponsiveContainer width="100%" height={300}>
           <AreaChart data={data}>
             <defs>
@@ -50,5 +50,5 @@ export function BalanceHistory() {
         </ResponsiveContainer>
       </CardContent>
     </Card>
-  )
+  );
 }
